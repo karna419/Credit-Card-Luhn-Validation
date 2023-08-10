@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [cardNumber, setCardNumber] = useState('');
+    const [isValid, setIsValid] = useState(null);
+
+    const validateCard = async () => {
+        try {
+            const response = await axios.post('http://localhost:5000/validate', { cardNumber });
+            setIsValid(response.data.isValid);
+        } catch (error) {
+            console.error("Error validating card:", error);
+        }
+    };
+
+    return (
+        <div className="App">
+            <h1>Credit Card Validation</h1>
+            <input 
+                type="text" 
+                value={cardNumber} 
+                onChange={(e) => setCardNumber(e.target.value)} 
+                placeholder="Enter your card number"
+            />
+            <button onClick={validateCard}>Validate</button>
+            {isValid !== null && (
+                <p>{isValid ? "Valid Card Number!" : "Invalid Card Number."}</p>
+            )}
+        </div>
+    );
 }
 
 export default App;
