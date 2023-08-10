@@ -11,3 +11,82 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+  .App {
+    padding: 20px;
+  }
+  
+  input[type="text"],
+  button {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+  }
+
+  button {
+    margin-top: 20px;
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .App {
+    padding: 40px; 
+  }
+
+  input[type="text"] {
+    width: 70%;
+  }
+  
+  button {
+    width: 25%;
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 1025px) {
+  .App {
+    padding: 60px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  input[type="text"] {
+    width: 70%;
+  }
+  
+  button {
+    width: 25%; 
+  }
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+.App.is-valid {
+  background-color: #e6ffe6; /* You can style it differently when a card is valid */
+}
+
+.card-input {
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 10px;
+}
+
+.validate-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
