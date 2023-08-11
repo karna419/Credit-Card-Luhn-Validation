@@ -15,6 +15,7 @@ const CreditCardForm = () => {
 
         try {
             const response = await axios.post('http://localhost:5000/validate', { cardNumber });
+             // const response = await axios.post('https://luhn-valid-8b66add23927.herokucardform.com/validate', { cardNumber }); // This is the deployed version.            
             setIsValid(response.data.isValid);
         } catch (error) {
             console.error("Error validating card:", error);
@@ -24,7 +25,7 @@ const CreditCardForm = () => {
     };
 
     return (
-        <div className={`App ${isValid ? 'is-valid' : ''}`}>
+        <div className={`cardform ${isValid ? 'is-valid' : ''}`}>
             <h1>Credit Card Validation</h1>
 
             <input
