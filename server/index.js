@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // Middleware to parse JSON requests
 app.use(express.json());
@@ -11,12 +11,20 @@ app.use(cors());
 
 // Luhn Algorithm Validation
 function isValidCreditCard(value) {
-    let nCheck = 0, nDigit = 0, bEven = false;
-    value = value.replace(/\D/g, "");
+    // Check for non-digit characters
+    if (/[^0-9\s]+/.test(value)) return false;
+
+    // Remove spaces
+    value = value.replace(/\s+/g, '');
+
+    // Check the length for typical credit card numbers
+    if (value.length < 13 || value.length > 19) return false;
+
+    let nCheck = 0, bEven = false;
 
     for (let n = value.length - 1; n >= 0; n--) {
-        let cDigit = value.charAt(n),
-              nDigit = parseInt(cDigit, 10);
+        let cDigit = value.charAt(n);
+        let nDigit = parseInt(cDigit, 10);
 
         if (bEven) {
             if ((nDigit *= 2) > 9) nDigit -= 9;
