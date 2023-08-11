@@ -8,7 +8,7 @@ function App() {
 
     const validateCard = async () => {
         try {
-            const response = await axios.post('http://localhost:5000/validate', { cardNumber });
+            const response = await axios.post('https://luhn-valid-8b66add23927.herokuapp.com//validate', { cardNumber });
             setIsValid(response.data.isValid);
         } catch (error) {
             console.error("Error validating card:", error);
